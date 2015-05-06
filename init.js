@@ -35,10 +35,13 @@ printBanner();
 
 // Verify we are running in an empty folder
 var cwd = process.cwd();
-if (fs.readdirSync(cwd).length) {
-  console.error(chalk.red('The current working directory is not empty!'));
-  console.error('Please create a new directory, cd into it, then try running this script again.');
-  process.exit(1);
+var existingFiles = fs.readdirSync(cwd).length;
+if (existingFiles.length) {
+  if (existingFiles.length > 1 || existingFiles[0] !== '.DS_Store') {
+    console.error(chalk.red('The current working directory is not empty!'));
+    console.error('Please create a new directory, cd into it, then try running this script again.');
+    process.exit(1);
+  }
 }
 
 
