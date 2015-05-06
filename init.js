@@ -67,6 +67,17 @@ catch (e) {
   console.log('\nPlease ensure ruby is installed (and on your PATH), then try again.');
   process.exit(1);
 }
+try {
+  runCommand('bundle --version');
+}
+catch (e) {
+  console.error('\n' + chalk.red('Command failed.'));
+  console.log(
+    '\nPlease install the ' + chalk.cyan('bundler') + ' gem, then try again (you might need sudo):' +
+    chalk.gray('\n\n  $') + ' gem install bundler'
+  );
+  process.exit(1);
+}
 logSuccess('System looks OK.');
 
 
